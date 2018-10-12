@@ -7,21 +7,16 @@
  * @author    Enrico Schiller
  * @license   GPL-3.0+
  * @copyright querformat GmbH & Co. KG
+ *
+ * https://github.com/querformat/contao-layout-sections-extender
  */
 
-/**
- * Costum Column Hack
- */
 $GLOBALS['TL_DCA']['tl_article']['fields']['inColumn']['options_callback'] = array('tl_article_qf', 'addCustomLayoutSectionsHook');
 
 class tl_article_qf extends tl_article
 {
     /**
-     * add hook logic
-     *
-     * method awaits array of minimum one section key
-     * translations should be provided by using
-     * $GLOBALS['TL_LANG']['COLS']['your-col-key-name'] = translation
+     * Costum Column Hack
      *
      * @param DataContainer $dc
      *
@@ -31,18 +26,13 @@ class tl_article_qf extends tl_article
     {
         $arrSections = $this->getActiveLayoutSections($dc);
         if (isset($GLOBALS['TL_HOOKS']['addLayoutSections']) && is_array($GLOBALS['TL_HOOKS']['addLayoutSections'])) {
-            foreach ($GLOBALS['TL_HOOKS']['addLayoutSections'] as $callback) {
-                if (($val = \System::importStatic($callback[0])->{$callback[1]}()) !== false) {
-                    if (is_array($val) && count($val) > 0) {
-                        $newSections = Backend::convertLayoutSectionIdsToAssociativeArray($val);
-                        foreach ($newSections as $k => $v) {
-                            if (empty($v))
-                                $newSections[$k] = $k;
-                        }
-                        $arrSections = array_merge($arrSections, $newSections);
-                    } else {
-                        \System::log('"addLayoutSections" failed in method: ' . $callback[0] . '::' . $callback[1], __METHOD__, TL_ERROR);
+            foreach ($GLOBALS['TL_HOOKS']['addLayoutSections'] as $arrCustomSections) {
+                if (is_array($arrCustomSections) && count($arrCustomSections) > 0) {
+                    foreach ($arrCustomSections as $k => $v) {
+                        if (empty($v))
+                            $arrCustomSections[$k] = $k;
                     }
+                    $arrSections = array_merge($arrSections, $arrCustomSections);
                 }
             }
         }
