@@ -1,0 +1,30 @@
+{
+  "name": "querformat/layout-sections-extender",
+  "description": "Ermöglicht Modulen, über einen neuen Hook, eigene Layoutbereiche im Backend zur Verfügung zu stellen",
+  "keywords": ["article","modules","layout","content","contao"],
+  "type": "contao-module",
+  "license": "LGPL-3.0+",
+  "authors": [
+    {
+      "name": "Enrico Schiller",
+      "email": "schiller@querformat.info",
+      "homepage": "https://www.querformat.info",
+      "role": "Webdeveloper"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/querformat/contao-layout-sections-extender/issues",
+    "source": "https://github.com/querformat/contao-layout-sections-extender"
+  },
+  "require": {
+    "php": ">=5.3.4",
+    "contao/core-bundle": "^4.4"
+  },
+  "extra": {
+    "contao": {
+      "sources": {
+        "src/layout-sections-extender": "system/modules/layout-sections-extender"
+      }
+    }
+  }
+}
