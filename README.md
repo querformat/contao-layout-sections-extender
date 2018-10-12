@@ -7,7 +7,6 @@
 Mit dem Modul layout-sections-extender steht ein neuer Hook in Contao bereit.
 
 Der "addLayoutSections"-Hook ermöglicht anderen Modulen neue Layoutbereiche für Artikel bereit zu stellen ohne das diese über die Layouteinstellungen in Contao definiert werden müssen.
-Erwartet wird die Rückgabe eines Arrays
 
 ```php
 // config.php
